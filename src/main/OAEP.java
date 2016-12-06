@@ -21,15 +21,14 @@ public class OAEP {
 			e.printStackTrace();
 		}
 
-		int hashCount = (maskLen + digest.getDigestLength() - 1) / digest.getDigestLength();
+		int ceil = (maskLen + digest.getDigestLength() - 1) / digest.getDigestLength();
 
 		byte[] seed = toByteArray(mgfSeed);
-		System.out.println(javax.xml.bind.DatatypeConverter.printHexBinary(seed));
 
 		byte[] T = new byte[0];
 
-		for (int i = 0; i < hashCount; i++) {
-			System.out.println(javax.xml.bind.DatatypeConverter.printHexBinary(T));
+		for (int i = 0; i < ceil; i++) {
+
 			T = concatenate(T, SHA1(seed, i));
 
 		}
